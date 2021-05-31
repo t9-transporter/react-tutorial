@@ -1,6 +1,6 @@
 import React, { useContext } from "react";
 import "./TodoStyles.css";
-import context from "../context";
+import context from "./context";
 
 function TodoItem({ todo, index, onChange }) {
   let classes = ["listItemText"];

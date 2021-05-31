@@ -1,6 +1,8 @@
 import React from "react";
-import TodoList from "./componets/Todo/TodoList";
+import TodoList from "./componets/TodoList";
 import context from "./componets/context";
+import AddTodo from "./componets/AddTodo";
+import Modal from "./componets/ModalAddTodo";
 
 function App() {
   let [todos, setTodos] = React.useState([
@@ -26,10 +28,23 @@ function App() {
     setTodos(todos.filter((todo) => todo.id !== id));
   }
 
+  function addTodo(title) {
+    setTodos(
+      todos.concat([
+        {
+          title,
+          id: Date.now(),
+          completed: false,
+        },
+      ])
+    );
+  }
   return (
     <context.Provider value={{ removeTodo }}>
       <div className="taskApp">
         <h1>Tasks to complete</h1>
+        <Modal />
+        <AddTodo onCreate={addTodo} />
         <h2>
           {todos.length > 0 ? "Remain: " + todos.length : "All tasks done!"}
         </h2>
